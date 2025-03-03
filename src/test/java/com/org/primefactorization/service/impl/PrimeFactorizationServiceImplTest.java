@@ -128,23 +128,14 @@ class PrimeFactorizationServiceImplTest {
 
     /**
      * Parameterized test case: processNumber() should skip processing for invalid inputs.
-     * It should not call primeFactors() for "0", "1", or any negative number.
+     * It should not call primeFactors() for empty String, string, "0", "1", or any negative number.
      */
     @ParameterizedTest
-    @ValueSource(strings = {"0", "1", "-5", "-10", "-100", ""})
+    @ValueSource(strings = {"0", "1", "-5", "-10", "abc", ""})
     void testProcessNumber_InvalidInputs(String input) {
         PrimeFactorizationServiceImpl spyService = spy(primeFactorizationService);
         spyService.processNumber(input);
 
         verify(spyService, never()).primeFactors(anyInt());
     }
-    /**
-     * Test case: processNumber() should handle non-numeric input gracefully.
-     * It should catch NumberFormatException and return without exception.
-     */
-    @Test
-    void testProcessNumber_InvalidNumberFormat() {
-        primeFactorizationService.processNumber("abc");
-    }
-
 }
