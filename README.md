@@ -7,11 +7,12 @@ Handles invalid inputs and edge cases efficiently.
 
 ## Features
 
- Reads numbers from a file
- Computes prime factors of each number
- Handles **invalid numbers**, **zero**, and **negative numbers** **invalid numbers** gracefully
- Skips **blank lines** to avoid infinite loops
- Uses **BufferedReader** for memory-efficient processing
+ **File Validation** – Ensures the input file is valid before processing  
+ **Reads Numbers from a File** – Extracts numerical values efficiently  
+ **Computes Prime Factors** – Determines prime factors for each number  
+ **Handles Edge Cases Gracefully** – Supports invalid numbers, zero, one, and negative numbers  
+ **Skips Blank Lines** – Prevents infinite loops by handling empty lines  
+ **Memory-Efficient Processing** – Uses BufferedReader for optimal performance
 
 ## Project Structure
 
