@@ -37,13 +37,55 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
         if (!fileValidator.isValidFile(filePath)) {
             return;
         }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            //int blankLineCounts = 0;
             while ((line = reader.readLine()) != null) {
-                processNumber(line.trim());
+                line = line.trim();
+                if(!line.isEmpty()) {
+                    processNumber(line.trim());
+                } /*else {
+                    blankLineCounts++;
+                }*/
+                //"Currently, there is no break condition mentioned in requirements to stop processing the file after encountering X consecutive blank lines.
+                // We can add a check like the following to handle this scenario:"
+/*                if(blankLineCounts>X) {
+                    break;
+                }*/
             }
         } catch (IOException e) {
             throw new FileProcessingException("Error reading file: " + filePath, e);
+        }
+    }
+
+    /**
+     * Processes a single number, computing and logging its prime factors.
+     *
+     * @param numberStr The number as a string.
+     */
+    @Override
+    public void processNumber(String numberStr) {
+        try {
+            int number = Integer.parseInt(numberStr);
+            if (number == 0) {
+                LOGGER.debug("Skipping 0 as it has infinitely many factors.");
+                return;
+            }
+            else if(number == 1) {
+                LOGGER.debug("Number 1 does not have any prime factors");
+                return;
+            }
+            else if (number < 1) {
+                LOGGER.debug("Skipping non-positive integer: {}", number);
+                return;
+            }
+            List<Integer> factors = primeFactors(number);
+            String output = String.join(",", factors.stream().map(String::valueOf).toArray(String[]::new));
+            System.out.println(output);
+            LOGGER.debug("Prime factor for number {}: {}", number, output);
+        } catch (NumberFormatException e) {
+            LOGGER.debug("Skipping invalid integer: {}", numberStr);
         }
     }
 
@@ -66,38 +108,5 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
             factors.add(number);
         }
         return factors;
-    }
-
-    /**
-     * Processes a single number, computing and logging its prime factors.
-     *
-     * @param numberStr The number as a string.
-     */
-    @Override
-    public void processNumber(String numberStr) {
-        try {
-            if(numberStr.isEmpty()) {
-                LOGGER.error("Skipping as line is empty");
-                return;
-            }
-            int number = Integer.parseInt(numberStr);
-            if (number == 0) {
-                LOGGER.info("Skipping 0 as it has infinitely many factors.");
-                return;
-            }
-            else if(number == 1) {
-                LOGGER.info("Number 1 does not have any prime factors");
-                return;
-            }
-            else if (number < 1) {
-                LOGGER.info("Skipping non-positive integer: {}", number);
-                return;
-            }
-            List<Integer> factors = primeFactors(number);
-            String output = String.join(",", factors.stream().map(String::valueOf).toArray(String[]::new));
-            LOGGER.info("Processed {} and prime factors are -> {}", number, output);
-        } catch (NumberFormatException e) {
-            LOGGER.error("Skipping invalid integer: {}", numberStr);
-        }
     }
 }

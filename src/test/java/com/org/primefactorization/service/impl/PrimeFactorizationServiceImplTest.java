@@ -67,9 +67,10 @@ class PrimeFactorizationServiceImplTest {
     /**
      * Tests prime factorization for 1 (should return an empty list).
      */
-    @Test
-    void testPrimeFactors_One() {
-        assertTrue(primeFactorizationService.primeFactors(1).isEmpty());
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, -5})
+    void testPrimeFactors_One(int input) {
+        assertTrue(primeFactorizationService.primeFactors(input).isEmpty());
     }
 
     /**
@@ -81,7 +82,9 @@ class PrimeFactorizationServiceImplTest {
     void testProcessFile_ValidFile(@TempDir Path tempDir) throws IOException {
         File testFile = tempDir.resolve("test.txt").toFile();
         try (FileWriter writer = new FileWriter(testFile)) {
-            writer.write("10\n15\n20");
+            writer.append("35").append(System.lineSeparator()).append("40").append(System.lineSeparator())
+                    .append("a").append(System.lineSeparator()).append("@100").append(System.lineSeparator()).append("2000")
+                    .append(System.lineSeparator()).append("12.3");
         }
 
         when(fileValidator.isValidFile(testFile.getAbsolutePath())).thenReturn(true);
