@@ -32,6 +32,7 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
      *
      * @param filePath Path to the input file.
      */
+    @Override
     public void processFile(String filePath) {
         if (!fileValidator.isValidFile(filePath)) {
             return;
@@ -52,6 +53,7 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
      * @param number The input integer.
      * @return A list of prime factors.
      */
+    @Override
     public List<Integer> primeFactors(int number) {
         List<Integer> factors = new ArrayList<>();
         for (int i = 2; i * i <= number; i++) {
@@ -71,6 +73,7 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
      *
      * @param numberStr The number as a string.
      */
+    @Override
     public void processNumber(String numberStr) {
         try {
             if(numberStr.isEmpty()) {

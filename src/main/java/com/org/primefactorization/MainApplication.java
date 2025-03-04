@@ -28,7 +28,7 @@ public class MainApplication {
         if (args.length != 1) {
             LOGGER.error("Invalid number of arguments provided. Expected: 1, Received: {}.", args.length);
             LOGGER.info("Usage: java -jar PrimeFactorization.jar <file_path>");
-            return 1; // Return exit code instead of System.exit()
+            return 1;
         }
 
         String filePath = args[0];

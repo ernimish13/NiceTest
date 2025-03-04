@@ -25,4 +25,6 @@ public interface PrimeFactorizationService {
      * @return A list of prime factors.
      */
     List<Integer> primeFactors(int number);
+
+    void processNumber(String numberStr);
 }
