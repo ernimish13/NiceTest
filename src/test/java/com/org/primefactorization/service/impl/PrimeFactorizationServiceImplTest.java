@@ -69,7 +69,7 @@ class PrimeFactorizationServiceImplTest {
      */
     @ParameterizedTest
     @ValueSource(ints = {0, 1, -5})
-    void testPrimeFactors_One(int input) {
+    void testPrimeFactors_InvalidNumbers(int input) {
         assertTrue(primeFactorizationService.primeFactors(input).isEmpty());
     }
 
@@ -81,10 +81,11 @@ class PrimeFactorizationServiceImplTest {
     @Test
     void testProcessFile_ValidFile(@TempDir Path tempDir) throws IOException {
         File testFile = tempDir.resolve("test.txt").toFile();
+        String lineSeparator = System.lineSeparator();
         try (FileWriter writer = new FileWriter(testFile)) {
-            writer.append("35").append(System.lineSeparator()).append("40").append(System.lineSeparator())
-                    .append("a").append(System.lineSeparator()).append("@100").append(System.lineSeparator()).append("2000")
-                    .append(System.lineSeparator()).append("12.3");
+            writer.append("35").append(lineSeparator).append("40").append(lineSeparator)
+                    .append("a").append(lineSeparator).append(lineSeparator).append("@100").append(lineSeparator).append("2000")
+                    .append(lineSeparator).append("12.3");
         }
 
         when(fileValidator.isValidFile(testFile.getAbsolutePath())).thenReturn(true);
