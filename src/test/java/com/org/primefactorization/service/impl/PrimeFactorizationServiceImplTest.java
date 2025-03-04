@@ -59,7 +59,7 @@ class PrimeFactorizationServiceImplTest {
      * Tests prime factorization for numbers that are already prime.
      */
     @Test
-    void testPrimeFactors_PrimeNumbers() {
+    void testPrimeNumbers() {
         assertEquals(List.of(13), primeFactorizationService.primeFactors(13));
         assertEquals(List.of(97), primeFactorizationService.primeFactors(97));
     }
@@ -69,7 +69,7 @@ class PrimeFactorizationServiceImplTest {
      */
     @ParameterizedTest
     @ValueSource(ints = {0, 1, -5})
-    void testPrimeFactors_InvalidNumbers(int input) {
+    void testInvalidNumbers(int input) {
         assertTrue(primeFactorizationService.primeFactors(input).isEmpty());
     }
 
@@ -79,7 +79,7 @@ class PrimeFactorizationServiceImplTest {
      * @param tempDir Temporary directory for testing.
      */
     @Test
-    void testProcessFile_ValidFile(@TempDir Path tempDir) throws IOException {
+    void testValidFile(@TempDir Path tempDir) throws IOException {
         File testFile = tempDir.resolve("test.txt").toFile();
         String lineSeparator = System.lineSeparator();
         try (FileWriter writer = new FileWriter(testFile)) {
@@ -98,7 +98,7 @@ class PrimeFactorizationServiceImplTest {
      * Tests processing of a file when an IOException occurs.
      */
     @Test
-    void testProcessFile_FileProcessingException() {
+    void testFileProcessingException() {
         when(fileValidator.isValidFile("invalid/path")).thenReturn(true);
 
         assertThrows(FileProcessingException.class, () -> primeFactorizationService.processFile("invalid/path"));
@@ -108,7 +108,7 @@ class PrimeFactorizationServiceImplTest {
      * Tests handling when the file is invalid.
      */
     @Test
-    void testProcessFile_InvalidFile() {
+    void testInvalidFile() {
         when(fileValidator.isValidFile("invalid.txt")).thenReturn(false);
 
         assertDoesNotThrow(() -> primeFactorizationService.processFile("invalid.txt"));
@@ -120,7 +120,7 @@ class PrimeFactorizationServiceImplTest {
      * It should call primeFactors() to compute factors.
      */
     @Test
-    void testProcessNumber_ValidNumber() {
+    void testValidNumber() {
         // Spy on the service to mock primeFactors() behavior
         PrimeFactorizationServiceImpl spyService = spy(primeFactorizationService);
         doReturn(Arrays.asList(2, 3)).when(spyService).primeFactors(6);
@@ -136,7 +136,7 @@ class PrimeFactorizationServiceImplTest {
      */
     @ParameterizedTest
     @ValueSource(strings = {"0", "1", "-5", "-10", "abc", ""})
-    void testProcessNumber_InvalidInputs(String input) {
+    void testInvalidInputs(String input) {
         PrimeFactorizationServiceImpl spyService = spy(primeFactorizationService);
         spyService.processNumber(input);
 
