@@ -22,7 +22,7 @@ public class FileValidator {
      * Logs an error if the file does not exist or is not a regular file.
      *
      * @param filePath the path of the file to validate.
-     * @return {@code true} if the file exists and is valid, otherwise {@code false}.
+     * @return {@code true} if the file exists, is valid, txt or csv extension or file has some data, otherwise {@code false}.
      */
     public boolean isValidFile(String filePath) {
         Path path = Paths.get(filePath);
@@ -34,6 +34,12 @@ public class FileValidator {
         }
         else if (!file.isFile()) {
             LOGGER.error("Error: '{}' is not a valid file.", filePath);
+            isValidFile =  false;
+        } else if(!file.getName().endsWith(".txt") && !file.getName().endsWith(".csv")) {
+            LOGGER.error("Error: '{}' is not a valid file. Only .txt or .csv files are allowed.", filePath);
+            isValidFile =  false;
+        } else if(file.length() == 0) {
+            LOGGER.error("Error: '{}' is empty file.", filePath);
             isValidFile =  false;
         }
 

@@ -7,7 +7,7 @@ Handles invalid inputs and edge cases efficiently.
 
 ## Features
 
- **File Validation** – Ensures the input file is valid before processing  
+ **File Validation** – Ensures the input file is valid, has valid extension(txt or csv) and not empty file before processing  
  **Reads Numbers from a File** – Extracts numerical values efficiently  
  **Computes Prime Factors** – Determines prime factors for each number  
  **Handles Edge Cases Gracefully** – Supports invalid numbers, zero, one, and negative numbers  

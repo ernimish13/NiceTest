@@ -26,7 +26,7 @@ public class MainApplication {
 
     public int process(String[] args) {
         if (args.length != 1) {
-            LOGGER.error("Invalid number of arguments provided. Expected: 1, Received: {}.", args.length);
+            LOGGER.error("Invalid number of arguments provided. Expected: 1(file path), Received: {}.", args.length);
             LOGGER.info("Usage: java -jar PrimeFactorization.jar <file_path>");
             return 1;
         }
