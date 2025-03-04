@@ -43,7 +43,7 @@ class PrimeFactorizationProcessorTest {
      * Tests successful execution of the prime factorization process.
      */
     @Test
-    void testExecute_Success() {
+    void testSuccess() {
         int exitCode = processor.execute(FILE_PATH);
         assertEquals(0, exitCode, "Expected exit code 0 for successful execution.");
     }
@@ -52,7 +52,7 @@ class PrimeFactorizationProcessorTest {
      * Tests handling of an invalid file exception.
      */
     @Test
-    void testExecute_InvalidFileException() {
+    void testInvalidFileException() {
         doThrow(new InvalidFileException("Invalid file"))
                 .when(primeFactorizationService).processFile(FILE_PATH);
 
@@ -64,7 +64,7 @@ class PrimeFactorizationProcessorTest {
      * Tests handling of a file processing exception.
      */
     @Test
-    void testExecute_FileProcessingException() {
+    void testFileProcessingException() {
         doThrow(new FileProcessingException("Error processing file", new RuntimeException()))
                 .when(primeFactorizationService).processFile(FILE_PATH);
 
@@ -76,7 +76,7 @@ class PrimeFactorizationProcessorTest {
      * Tests handling of an invalid number format exception.
      */
     @Test
-    void testExecute_InvalidNumberFormatException() {
+    void testInvalidNumberFormatException() {
         doThrow(new InvalidNumberFormatException("Invalid number format"))
                 .when(primeFactorizationService).processFile(FILE_PATH);
 
@@ -88,7 +88,7 @@ class PrimeFactorizationProcessorTest {
      * Tests handling of a non-positive number exception.
      */
     @Test
-    void testExecute_NonPositiveNumberException() {
+    void testNonPositiveNumberException() {
         doThrow(new NonPositiveNumberException("Non-positive number"))
                 .when(primeFactorizationService).processFile(FILE_PATH);
 
