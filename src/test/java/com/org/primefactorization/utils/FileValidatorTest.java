@@ -64,7 +64,7 @@ class FileValidatorTest {
      * Tests if a jpeg file is invalid file.
      */
     @Test
-    void testIsValidFile_JPEG() throws Exception {
+    void testJPEGFile() throws Exception {
         File validFile = tempDir.resolve("test.jpeg").toFile();
         assertTrue(validFile.createNewFile()); // Create the file
         assertFalse(fileValidator.isValidFile(validFile.getAbsolutePath()));
