@@ -45,7 +45,7 @@ class MainApplicationTest {
         * Test that the process method returns an error when no arguments are provided.
      */
     @Test
-    void testProcess_MissingArguments_ReturnsError() {
+    void testMissingArguments_ReturnsError() {
         String[] args = {};
         int exitCode = mainApplication.process(args);
         assertEquals(1, exitCode, "Expected failure due to missing arguments (exit code 1)");
@@ -55,7 +55,7 @@ class MainApplicationTest {
         * Test that the process method returns when valid arguments are provided.
      */
     @Test
-    void testProcess_ValidArgument() throws IOException {
+    void testValidArgument() throws IOException {
         File validFile = tempDir.resolve("test.txt").toFile();
         try (FileWriter writer = new FileWriter(validFile)) {
             writer.write("test data");
