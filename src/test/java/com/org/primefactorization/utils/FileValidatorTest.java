@@ -44,7 +44,7 @@ class FileValidatorTest {
     void testIsValidFile(String input) throws IOException {
         File validFile = tempDir.resolve(input).toFile();
         try (FileWriter writer = new FileWriter(validFile)) {
-            writer.write("Hello, World!");
+            writer.write("test data");
         }
         assertTrue(fileValidator.isValidFile(validFile.getAbsolutePath()));
     }
