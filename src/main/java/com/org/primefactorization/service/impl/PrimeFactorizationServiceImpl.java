@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Handles the processing of a file to compute prime factorizations.
@@ -61,6 +62,7 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
 
     /**
      * Processes a single number, computing and logging its prime factors.
+     * Added debug logs for error scenarios.
      *
      * @param numberStr The number as a string.
      */
@@ -81,7 +83,9 @@ public class PrimeFactorizationServiceImpl implements PrimeFactorizationService 
                 return;
             }
             List<Integer> factors = primeFactors(number);
-            String output = String.join(",", factors.stream().map(String::valueOf).toArray(String[]::new));
+            String output = factors.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(","));
             System.out.println(output);
             LOGGER.debug("Prime factor for number {}: {}", number, output);
         } catch (NumberFormatException e) {
