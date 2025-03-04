@@ -37,7 +37,7 @@ class FileValidatorTest {
      * Verifies that {@code isValidFile} correctly identifies valid text and CSV files.
      *
      * @param input the name of the test file (e.g., "test.txt", "test.csv")
-     * @throws Exception if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @ParameterizedTest
     @ValueSource(strings = {"test.txt", "test.csv"})
